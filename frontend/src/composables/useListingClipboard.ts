@@ -149,3 +149,15 @@ async function handleInternalPaste() {
 export function useListingClipboard() {
   return { copyCut, handleInternalPaste, hasInternalItems, isInternalRecent };
 }
+
+/** @internal tests only */
+export function __resetClipboardForTest() {
+  clipboard = { items: [] };
+  internalClipboardTimestamp = 0;
+}
+
+/** @internal tests only */
+export function __setClipboardForTest(next: InternalClipboard) {
+  clipboard = { ...next, items: [...next.items] };
+  internalClipboardTimestamp = Date.now();
+}
